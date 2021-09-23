@@ -11,6 +11,25 @@ Model
 We will be using BART model.  Given the context and question, it should be able to give us answer.
 
 
+
+==============================
+BERT - Question encoder
+==============================
+
+.. code-block:: python
+
+ class QuestionEncoder(nn.Module):
+
+    def __init__(self):
+        super(QuestionEncoder, self).__init__()
+        self.bert = BertModel.from_pretrained('bert-base-uncased')
+
+    def forward(self, x):
+        x = self.bert(**x)
+        x=x["last_hidden_state"]
+        x = x[:,0,:]
+        return x
+
 ==============================
 BART
 ==============================
