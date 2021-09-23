@@ -18,7 +18,7 @@ class QuestionEncoder(nn.Module):
 
 
 if __name__ == "__main__":
-    doc = torch.load('/media/sannapareddy/DATA/dpr/END2QnADatasets-main/doc-id.pt')
+    doc = torch.load('doc-id.pt')
     tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
     inputs = tokenizer(["hello","HELLO"], return_tensors="pt", padding=True)
     qm=QuestionEncoder()

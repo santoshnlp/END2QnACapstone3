@@ -14,7 +14,7 @@ import pickle
 EPOCHS=10
 MODEL_PATH= 'models'
 
-doc_enc=torch.load( '/media/sannapareddy/DATA/dpr/END2QnADatasets-main/document_enc.pt')
+doc_enc=torch.load( 'document_enc.pt')
 
 def labels_tensor(labels):
     print(doc_enc)
@@ -22,7 +22,6 @@ def labels_tensor(labels):
     for i in range(len(labels)):
         print(labels[i])
         label_tensors_list.append(doc_enc[labels[i]])
-    #labels_tensor = torch.cat(label_tensors_list, dim=2)
     labels_tensor =  torch.stack(label_tensors_list)
 
     return labels_tensor
@@ -70,7 +69,7 @@ def validate(model,validate_loader,optimizer,iteration,epoch,train_loss, best_va
             train_loss,
             val_loss
         ))
-    #print(train_loss,)
+
     return best_val_loss
 
 def train(model,train_dataloader, validate_loader, optimizer,best_val_loss=1e9):
@@ -83,9 +82,9 @@ def train(model,train_dataloader, validate_loader, optimizer,best_val_loss=1e9):
 
                output = model(inputs)
                label_t=labels_tensor(labels)
-               #label_t.requires_grad = False
+
                loss_op = loss(output, label_t)
-               print("34rterrrrrrrg", loss_op)
+
                loss_op.backward()
                optimizer.step()
                optimizer.zero_grad()
