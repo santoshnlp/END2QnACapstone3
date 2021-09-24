@@ -29,6 +29,10 @@ BERT - Question encoder
         x=x["last_hidden_state"]
         x = x[:,0,:]
         return x
+        
+        
+.. figure:: train_val_loss.png
+   :scale: 50
 
 ==============================
 BART
