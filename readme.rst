@@ -11,6 +11,10 @@ Model
 We will be using BART model.  Given the context and question, it should be able to give us answer.
 
 
+==============================
+BERT - Document encoder
+==============================
+Used 'bert-base-uncased' as document encoder. All the encodings were saved to a tesor object for later refrence.
 
 ==============================
 BERT - Question encoder
@@ -32,8 +36,10 @@ BERT - Question encoder
         
 ------------------------
 Dataset
-------------------------        
-        
+------------------------  
+
+ Set of questions collected.  
+ 
 ------------------------
 Training/Evaluation
 ------------------------
@@ -48,12 +54,41 @@ FAISS
 ==============================
 ------------------------
 Dataset
-------------------------        
-        
+------------------------    
+All the document encodings were added to a list.
+
+.. code-block:: python
+
+ de=torch.load('document_enc.pt')
+
+
+ x=de[0].cpu().detach().numpy()
+ t=np.array([x])
+
+
+ for i in range(1,len(de)):
+    x = de[i].cpu().detach().numpy()
+    p = np.array([x])
+    t= np.append(t, p, axis = 0)
+ 
+ 
+This list was used to initialize the FAISS model
+
+.. code-block:: python
+
+ index.add(t)
+ 
+ 
 ------------------------
 Training/Evaluation
 ------------------------
+Pre-trained model was used.
 
+.. code-block:: python
+
+ d=768
+ index=faiss.IndexFlatL2(d)
+ 
 ------------------------
 Results
 ------------------------
