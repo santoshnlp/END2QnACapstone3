@@ -29,6 +29,46 @@ BERT - Question encoder
         x=x["last_hidden_state"]
         x = x[:,0,:]
         return x
+        
+------------------------
+Dataset
+------------------------        
+        
+------------------------
+Training/Evaluation
+------------------------
+
+        
+.. figure:: train_val_loss.png
+   :scale: 50
+
+
+==============================
+FAISS
+==============================
+------------------------
+Dataset
+------------------------        
+        
+------------------------
+Training/Evaluation
+------------------------
+
+------------------------
+Results
+------------------------
+FAISS test samples output
+
+  =================================================================  =================================================   ======================
+  Question                                                             FAISS output                                      Exact document
+  =================================================================  =================================================   ======================
+  is labelled data needed in  supervised learning?                     [11 22 10 13]                                         22
+  does  pytorch uses caching memory allocator?                         [11 10 13 41]                                         41
+  How can I learn about Python subprocesses that are still running?    [11 10 41 22]                                         41
+  can i use dictionary for padding argument in nn.conv2d function      [11 13  8 28]                                         13
+  In Pytorch, which optimizers are supported?                          [10 11 13 22]                                         10
+  What's difference between tf.nn.ctc_loss with pytorch.nn.CTCLoss     [11 13 10 25]                                         11
+  =================================================================  =================================================   ======================
 
 ==============================
 BART
